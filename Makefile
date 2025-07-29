@@ -20,34 +20,34 @@ all: sort clean
 sort: main.o processing_text.o comparators.o utilits.o bubblesort.o
 	g++ main.o processing_text.o comparators.o utilits.o bubblesort.o $(flags) -o main
 
-main.o: main.c
-	g++ -c $(flags) main.c
+main.o: ./src/main.c
+	g++ -c $(flags) ./src/main.c
 
-processing_text.o: processing_text.c
-	g++ -c $(flags) processing_text.c
+processing_text.o: ./src/processing_text.c
+	g++ -c $(flags) ./src/processing_text.c
 
-comparators.o: comparators.c
-	g++ -c $(flags) comparators.c
+comparators.o: ./src/comparators.c
+	g++ -c $(flags) ./src/comparators.c
 
-utilits.o: utilits.c
-	g++ -c $(flags) utilits.c
+utilits.o: ./src/utilits.c
+	g++ -c $(flags) ./src/utilits.c
 
-bubblesort.o: bubblesort.c
-	g++ -c $(flags) bubblesort.c
+bubblesort.o: ./src/bubblesort.c
+	g++ -c $(flags) ./src/bubblesort.c
 
 #run:
 
 length_up:
-	./main unsort.txt sort.txt length_up
+	./main ./example/unsort.txt ./example/sort.txt length_up
 
 length_down:
-	./main unsort.txt sort.txt length_down
+	./main ./example/unsort.txt ./example/sort.txt length_down
 
 alphabet:
-	./main unsort.txt sort.txt alphabet
+	./main ./example/unsort.txt ./example/sort.txt alphabet
 
 alphabet_reverse:
-	./main unsort.txt sort.txt alphabet_reverse
+	./main ./example/unsort.txt ./example/sort.txt alphabet_reverse
 
 #clean:
 

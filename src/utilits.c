@@ -1,4 +1,4 @@
-#include "strsort.h"
+#include "../include/strsort.h"
 
 void CheckFclose(FILE* file_ptr)
 {

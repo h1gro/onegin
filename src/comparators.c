@@ -1,4 +1,4 @@
-#include "strsort.h"
+#include "../include/strsort.h"
 #include <string.h>
 #include <ctype.h>
 

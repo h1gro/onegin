@@ -1,4 +1,4 @@
-#include "strsort.h"
+#include "../include/strsort.h"
 #include <sys/stat.h>
 
 /*suppoted methods of sort: | Cmd of comparators:

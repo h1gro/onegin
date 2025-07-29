@@ -1,4 +1,4 @@
-#include "strsort.h"
+#include "../include/strsort.h"
 #include <sys/stat.h>
 
 void ReadArgs(struct file_t* files, struct stat* unsort_inf, int argc, char* argv[])
