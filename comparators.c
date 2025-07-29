@@ -82,27 +82,24 @@ int CmpAlphabet(const void* str1, const void* str2)
     assert(string1);
     assert(string2);
 
-    return strcmp(string1, string2); //strcmp does't ignore "'", example: `God damn old man
+    /*while we dont get the end of one of the strings we compare their
+    symbols (alphabet symbols by func isalpha()) on aski_codes by func tolower()*/
+    while ((*string1) && (*string2))
+    {
+        if ((isalpha(*string1)) && (isalpha(*string2)))
+        {
+            if (tolower(*string1) != tolower(*string2))
+            {
+                return tolower(*string1) - tolower(*string2);
+            }
+        }
+        /*increase pointers to compare next symbols of string if
+        previous was the same*/
+        string1++;
+        string2++;
+    }
 
-//old realisation:
-//     /*while we dont get the end of one of the strings we compare their
-//     symbols (alphabet symbols by func isalpha()) on aski_codes by func tolower()*/
-//     while ((*string1) && (*string2))
-//     {
-//         if ((isalpha(*string1)) && (isalpha(*string2)))
-//         {
-//             if (tolower(*string1) != tolower(*string2))
-//             {
-//                 return tolower(*string1) - tolower(*string2);
-//             }
-//         }
-//         /*increase pointers to compare next symbols of string if
-//         previous was the same*/
-//         string1++;
-//         string2++;
-//     }
-//
-//     return 0;
+    return 0;
 }
 
 #ifdef QSORT_MODE

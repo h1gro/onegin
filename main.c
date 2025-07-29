@@ -20,7 +20,6 @@ int main(int argc, char* argv[])
     //this function defined what comparator user wrote
     DefineComp(&files, argv[3]);
 
-    //BubbleSort(files.addr, files.num_lines, StrCmp);
     SortText(&files); //qsort + bubblesort
 
     PrintBuffer(&files); //print sorted version of text in special file

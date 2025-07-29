@@ -7,12 +7,13 @@
 #include <assert.h>
 
 //<<modes:>>
-//#define QSORT_MODE
-#define BUBBLE_MODE
+#define QSORT_MODE
+//#define BUBBLE_MODE
+//------------------------------
 
 struct file_t
 {
-    FILE*  sort;                                 ////pointer on file with sorted text (where must be sorted text)
+    FILE*  sort;                                 //pointer on file with sorted text (where must be sorted text)
     FILE*  unsort;                               //pointer on file with unsorted text
     char*  text;                                 //array of the unsorted text
     char** addr;                                 //array of strings adr
@@ -53,15 +54,7 @@ enum is_empty
     BOTH_EMPTY   = 3,
 };
 
-enum sort_mode
-{
-    BUBBLE = 89,
-    QSORT  = 98,
-};
-
 is_empty IsEmpty         (const char* str1, const char* str2);
-
-int StrCmp           (const char* str1, const char* str2);
 compare LinearComparator (char elem1, char elem2);
 
 //comparators
@@ -79,21 +72,22 @@ int CmpAlphabetReverse (const char* str1, const char* str2);
 
 #endif
 
-int CmpAlphabet        (const void* str1, const void* str2);
+int CmpAlphabet      (const void* str1, const void* str2);
 //--------------------
-int CheckFile       (FILE* file);
-int IfSpace         (const char* string);
+int CheckFile        (FILE* file);
+int IfSpace          (const char* string);
+int StrCmp           (const char* str1, const char* str2);
 
 void CheckFclose     (FILE* file_ptr);
 void StringSwap      (char** a, char** b);
 void Dtor            (struct file_t* files);
 void SortText        (struct file_t* files);
 void PrintBuffer     (struct file_t* files);
-void BubbleSort      (char** buffer, int len, int (*comparator)(const char*, const char*));
 void CountLines      (struct file_t* files, size_t size);
 void FillingAddr     (struct file_t* files, size_t size);
 void FilesProcessing (struct file_t* files, size_t size);
 void DefineComp      (struct file_t* files, const char* comparator);
+void BubbleSort      (char** buffer, int len, int (*comparator)(const char*, const char*));
 void ReadArgs        (struct file_t* files, struct stat* unsort_inf, int argc, char* argv[]);
 
 #endif
