@@ -6,6 +6,10 @@
 #include <string.h>
 #include <assert.h>
 
+//<<modes:>>
+//#define QSORT_MODE
+#define BUBBLE_MODE
+
 struct file_t
 {
     FILE*  sort;                                 ////pointer on file with sorted text (where must be sorted text)
@@ -13,7 +17,12 @@ struct file_t
     char*  text;                                 //array of the unsorted text
     char** addr;                                 //array of strings adr
     size_t num_lines;                            //counter of lines
-    int (*comparator)(const void*, const void*); //name of func comparator
+
+    #ifdef QSORT_MODE
+    int (*comparator)(const void*, const void*); //name of func comparator for qsort
+    #else
+    int (*comparator)(const char*, const char*); //name of func comparator for bubblesort (self-realised)
+    #endif
 };
 
 //consts for errors of checking file
@@ -44,16 +53,33 @@ enum is_empty
     BOTH_EMPTY   = 3,
 };
 
-is_empty IsEmpty         (char* str1, char* str2);
+enum sort_mode
+{
+    BUBBLE = 89,
+    QSORT  = 98,
+};
 
-compare StrCmp           (char* str1, char* str2);
+is_empty IsEmpty         (const char* str1, const char* str2);
+
+int StrCmp           (const char* str1, const char* str2);
 compare LinearComparator (char elem1, char elem2);
 
 //comparators
-int CmpLengthUP        (const void* str1, const void* str2);
+#ifdef QSORT_MODE
+
+int CmpLengthUp        (const void* str1, const void* str2);
 int CmpLengthDown      (const void* str1, const void* str2);
-int CmpAlphabet        (const void* str1, const void* str2);
 int CmpAlphabetReverse (const void* str1, const void* str2);
+
+#else
+
+int CmpLengthUp        (const char* str1, const char* str2);
+int CmpLengthDown      (const char* str1, const char* str2);
+int CmpAlphabetReverse (const char* str1, const char* str2);
+
+#endif
+
+int CmpAlphabet        (const void* str1, const void* str2);
 //--------------------
 int CheckFile       (FILE* file);
 int IfSpace         (const char* string);
@@ -63,7 +89,7 @@ void StringSwap      (char** a, char** b);
 void Dtor            (struct file_t* files);
 void SortText        (struct file_t* files);
 void PrintBuffer     (struct file_t* files);
-void BubbleSort      (char** buffer, int len);
+void BubbleSort      (char** buffer, int len, int (*comparator)(const char*, const char*));
 void CountLines      (struct file_t* files, size_t size);
 void FillingAddr     (struct file_t* files, size_t size);
 void FilesProcessing (struct file_t* files, size_t size);

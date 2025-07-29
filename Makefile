@@ -15,8 +15,10 @@ flags = -D _DEBUG -ggdb3 -std=c++17 -O3 -Wall -Wextra -Weffc++ -Waggressive-loop
 
 all: sort clean
 
-sort: main.o processing_text.o comparators.o utilits.o
-	g++ main.o processing_text.o comparators.o utilits.o $(flags) -o main
+#compile:
+
+sort: main.o processing_text.o comparators.o utilits.o bubblesort.o
+	g++ main.o processing_text.o comparators.o utilits.o bubblesort.o $(flags) -o main
 
 main.o: main.c
 	g++ -c $(flags) main.c
@@ -30,6 +32,11 @@ comparators.o: comparators.c
 utilits.o: utilits.c
 	g++ -c $(flags) utilits.c
 
+bubblesort.o: bubblesort.c
+	g++ -c $(flags) bubblesort.c
+
+#run:
+
 length_up:
 	./main unsort.txt sort.txt length_up
 
@@ -41,6 +48,8 @@ alphabet:
 
 alphabet_reverse:
 	./main unsort.txt sort.txt alphabet_reverse
+
+#clean:
 
 clean:
 	rm -rf *.o *.exe *.exe.log *.exe.log.dmp
